@@ -14,7 +14,7 @@ namespace OfflineTextTranslatorApp
 
         public string LanguageFile { get => textBoxLanguageFile.Text; set => textBoxLanguageFile.Text = value; }
         public string TokenizerModelFile { get => textBoxTokenizerModelFile.Text; set => textBoxTokenizerModelFile.Text = value; }
-        public TokenizerType TokenizerModelFileType { get => (TokenizerType)comboBoxTokenizerModelFile.SelectedItem; set => comboBoxTokenizerModelFile.SelectedItem = value; }
+        public TokenizerType TokenizerModelFileType { get => (TokenizerType)(comboBoxTokenizerModelFile.SelectedItem ?? TokenizerType.None); set => comboBoxTokenizerModelFile.SelectedItem = value; }
         public string CTranslate2Directory { get => textBoxCTranslate2Directory.Text; set => textBoxCTranslate2Directory.Text = value; }
 
         private void OnbuttonLanguageFile_Click(object sender, EventArgs e)
