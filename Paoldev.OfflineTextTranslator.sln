@@ -1,0 +1,50 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33829.357
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Paoldev.OfflineTextTranslator", "Paoldev.OfflineTextTranslator\Paoldev.OfflineTextTranslator.vcxproj", "{963340EA-3110-4374-A381-7486055F45C3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Paoldev.OfflineTextTranslatorProjection", "Paoldev.OfflineTextTranslatorProjection\Paoldev.OfflineTextTranslatorProjection.csproj", "{67BE346D-B4C0-4150-B8DC-36046D586085}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OfflineTextTranslatorApp", "OfflineTextTranslatorApp\OfflineTextTranslatorApp.csproj", "{EEA43514-688F-42EB-8F69-E3A133450E4B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C41856F0-2383-4F03-830B-17E5D3C00BA5}"
+	ProjectSection(SolutionItems) = preProject
+		LICENSE.txt = LICENSE.txt
+		README.md = README.md
+		vcpkg.json = vcpkg.json
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Components", "Components", "{91ACA02E-D727-42D9-870E-FB9ABCF2C77D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{963340EA-3110-4374-A381-7486055F45C3}.Debug|x64.ActiveCfg = Debug|x64
+		{963340EA-3110-4374-A381-7486055F45C3}.Debug|x64.Build.0 = Debug|x64
+		{963340EA-3110-4374-A381-7486055F45C3}.Release|x64.ActiveCfg = Release|x64
+		{963340EA-3110-4374-A381-7486055F45C3}.Release|x64.Build.0 = Release|x64
+		{67BE346D-B4C0-4150-B8DC-36046D586085}.Debug|x64.ActiveCfg = Debug|x64
+		{67BE346D-B4C0-4150-B8DC-36046D586085}.Debug|x64.Build.0 = Debug|x64
+		{67BE346D-B4C0-4150-B8DC-36046D586085}.Release|x64.ActiveCfg = Release|x64
+		{67BE346D-B4C0-4150-B8DC-36046D586085}.Release|x64.Build.0 = Release|x64
+		{EEA43514-688F-42EB-8F69-E3A133450E4B}.Debug|x64.ActiveCfg = Debug|x64
+		{EEA43514-688F-42EB-8F69-E3A133450E4B}.Debug|x64.Build.0 = Debug|x64
+		{EEA43514-688F-42EB-8F69-E3A133450E4B}.Release|x64.ActiveCfg = Release|x64
+		{EEA43514-688F-42EB-8F69-E3A133450E4B}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{963340EA-3110-4374-A381-7486055F45C3} = {91ACA02E-D727-42D9-870E-FB9ABCF2C77D}
+		{67BE346D-B4C0-4150-B8DC-36046D586085} = {91ACA02E-D727-42D9-870E-FB9ABCF2C77D}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FABF32CC-C4CB-4846-A909-75937490C4B3}
+	EndGlobalSection
+EndGlobal

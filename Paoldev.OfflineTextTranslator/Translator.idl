@@ -1,0 +1,139 @@
+
+namespace Paoldev.OfflineTextTranslator
+{
+    /// <summary>
+    /// The type of the model passed to the tokenizer.
+    /// </summary>
+    enum TokenizerType
+    {
+        /// <summary>
+        /// Use the default tokenizer, without any specific model.
+        /// </summary>
+        None = 0,
+
+        /// <summary>
+        /// Use SentencePiece model for the tokenizer.
+        /// </summary>
+        SentencePiece,
+
+        /// <summary>
+        /// Use BPE model for the tokenizer.
+        /// </summary>
+        BPE
+    };
+
+    /// <summary>
+    /// Options to inizialize the translator class.
+    /// </summary>
+    struct TranslatorOptions
+    {
+        /// <summary>
+        /// The tokenizer model type; one of <see cref='TokenizerType' />.
+        /// </summary>
+        TokenizerType TokenizerModelType;
+
+        /// <summary>
+        /// The model file path (absolute or relative to the application working directory) to pass to the tokenizer; valid only if <see cref='TokenizerModelType' /> is <see cref='TokenizerType.SentencePiece' /> or <see cref='TokenizerType.BPE' />.
+        /// </summary>
+        String TokenizerModelFilePath;
+
+        /// <summary>
+        /// The directory of 'ctranslate2' model datas.
+        /// </summary>
+        String CTranslate2ModelDirectoryPath;
+    };
+
+    interface ITranslator;
+    runtimeclass Translator;
+
+    /// <summary>
+    /// The ITranslator public interface
+    /// </summary>
+    interface ITranslator
+    {
+        /// <summary>
+        /// Translate a string from source language to destination language.
+        /// sourceLanguage and destLanguage MUST be already formatted with model-specific prefixes; they may be empty.
+        /// Exceptions may be thrown.
+        /// </summary>
+        /// <param name="sourceText">the source string to be translated.</param>
+        /// <param name="sourceLanguage">the source string language, already formatted with model-specific prefix; it may be empty.</param>
+        /// <param name="destLanguage">the desired translation language, already formatted with model-specific prefix; it may be empty.</param>
+        /// <returns>The translated string.</returns>
+        [default_overload]
+        Windows.Foundation.IAsyncOperation<String> TranslateAsync(String sourceText, String sourceLanguage, String destLanguage);
+
+        /// <summary>
+        /// Translate a string from source language to many destination languages.
+        /// sourceLanguage and destLanguages MUST be already formatted with model-specific prefixes; they may be empty.
+        /// Exceptions may be thrown.
+        /// </summary>
+        /// <param name="sourceText">the source string to be translated.</param>
+        /// <param name="sourceLanguage">the source string language, already formatted with model-specific prefix; it may be empty.</param>
+        /// <param name="destLanguages">the desired translation languages, already formatted with model-specific prefix; it may be an empty array or some of its elements may be empty.</param>
+        /// <returns>The string translated to many languages; the output array size matches destLanguages size.</returns>
+        Windows.Foundation.IAsyncOperation<Windows.Foundation.Collections.IVector<String> > TranslateAsync(String sourceText, String sourceLanguage, Windows.Foundation.Collections.IVector<String> destLanguages);
+        
+        /// <summary>
+        /// Translate many strings from source language to destination language.
+        /// sourceLanguage and destLanguage MUST be already formatted with model-specific prefixes; they may be empty.
+        /// Exceptions may be thrown.
+        /// </summary>
+        /// <param name="sourceTexts">the source strings to be translated.</param>
+        /// <param name="sourceLanguage">the source strings language, already formatted with model-specific prefix; it may be empty.</param>
+        /// <param name="destLanguage">the desired translation language, already formatted with model-specific prefix; it may be empty.</param>
+        /// <returns>The translated strings; the output array size matches sourceTexts size.</returns>
+        Windows.Foundation.IAsyncOperation<Windows.Foundation.Collections.IVector<String> > TranslateAsync(Windows.Foundation.Collections.IVector<String> sourceTexts, String sourceLanguage, String destLanguage);
+
+        /// <summary>
+        /// Translate many strings, each one with a specific source language, to the same destination language.
+        /// sourceLanguages and destLanguage MUST be already formatted with model-specific prefixes; they may be empty.
+        /// sourceLanguages array can be empty; otherwise its size MUST match sourceTexts size.
+        /// Exceptions may be thrown.
+        /// </summary>
+        /// <param name="sourceTexts">the source strings to be translated.</param>
+        /// <param name="sourceLanguages">the source strings language, already formatted with model-specific prefix; it may be empty, otherwise its size MUST match sourceTexts size.</param>
+        /// <param name="destLanguage">the desired translation language, already formatted with model-specific prefix; it may be empty.</param>
+        /// <returns>The strings all translated to the same language; the output array size matches sourceTexts size.</returns>
+        Windows.Foundation.IAsyncOperation<Windows.Foundation.Collections.IVector<String> > TranslateAsync(Windows.Foundation.Collections.IVector<String> sourceTexts, Windows.Foundation.Collections.IVector<String> sourceLanguages, String destLanguage);
+
+        /// <summary>
+        /// Translate many strings, each one with a specific source language, to a specific destination language each one.
+        /// sourceLanguages and destLanguages MUST be already formatted with model-specific prefixes; they may be empty.
+        /// sourceLanguages and/or destLanguages array can be empty; otherwise their size MUST match sourceTexts size.
+        /// Exceptions may be thrown.
+        /// </summary>
+        /// <param name="sourceTexts">the source strings to be translated.</param>
+        /// <param name="sourceLanguages">the source strings language, already formatted with model-specific prefix; it may be an empty array, otherwise its size MUST match sourceTexts size and some of its elements may be empty.</param>
+        /// <param name="destLanguages">the desired translation languages, already formatted with model-specific prefix; it may be an empty array, otherwise its size MUST match sourceTexts size and some of its elements may be empty.</param>
+        /// <returns>The strings translated to their specific destination language; the output array size matches sourceTexts size.</returns>
+        Windows.Foundation.IAsyncOperation<Windows.Foundation.Collections.IVector<String> > TranslateAsync(Windows.Foundation.Collections.IVector<String> sourceTexts, Windows.Foundation.Collections.IVector<String> sourceLanguages, Windows.Foundation.Collections.IVector<String> destLanguages);
+
+        /// <summary>
+        /// Translate many strings, each one with a specific source language, to all specified destination languages.
+        /// sourceLanguages and destLanguages MUST be already formatted with model-specific prefixes; they may be empty.
+        /// sourceLanguages array can be empty; otherwise its size MUST match sourceTexts size.
+        /// destLanguages array can be empty or it can be of any size.
+        /// Exceptions may be thrown.
+        /// </summary>
+        /// <param name="sourceTexts">the source strings to be translated.</param>
+        /// <param name="sourceLanguages">the source strings language, already formatted with model-specific prefix; it may be empty, otherwise its size MUST match sourceTexts size.</param>
+        /// <param name="destLanguages">the desired translation languages for each source string.</param>
+        /// <returns>The strings each one translated to all specified destination languages; the output array size is the product of sourceTexts size and destLanguages size. To access the N-th translation of the M-th source string, the required index is "M * sourceTexts.size() + N" (where M and N are zero-based indices).
+        /// If destLanguages is empty, the output array size matches sourceTexts size and each source string has just one translation (as if destLanguages was an array of 1 element containing an empty string as destination language).</returns>
+        Windows.Foundation.IAsyncOperation<Windows.Foundation.Collections.IVector<String> > MultiTranslateAsync(Windows.Foundation.Collections.IVector<String> sourceTexts, Windows.Foundation.Collections.IVector<String> sourceLanguages, Windows.Foundation.Collections.IVector<String> destLanguages);
+    };
+
+    /// <summary>
+    /// The Translator class
+    /// </summary>
+    runtimeclass Translator : [default] ITranslator
+    {
+        /// <summary>
+        /// The costruction factory
+        /// </summary>
+        /// <param name="options">The options to initialize both the internal'tokenizer' and 'ctranslate2' libraries.</param>
+        /// <returns>The Translator instance.</returns>
+        static Windows.Foundation.IAsyncOperation<ITranslator> CreateAsync(TranslatorOptions options);
+    }
+}

@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="utf-8"?>
+<comments>
+	<entry>
+		<string><![CDATA[    [global::WinRT.WindowsRuntimeType("Paoldev.OfflineTextTranslator")]public enum TokenizerType : int]]></string>
+		<comment>
+			<![CDATA[/// <summary>
+        /// The type of the model passed to the tokenizer.
+        /// </summary>]]>
+		</comment>
+	</entry>
+	<entry>
+		<string><![CDATA[        None = unchecked((int)0),]]></string>
+		<comment>
+			<![CDATA[/// <summary>
+        /// Use the default tokenizer, without any specific model.
+        /// </summary>]]>
+		</comment>
+	</entry>
+	<entry>
+		<string><![CDATA[        SentencePiece = unchecked((int)0x1),]]></string>
+		<comment>
+			<![CDATA[/// <summary>
+        /// Use SentencePiece model for the tokenizer.
+        /// </summary>]]>
+		</comment>
+	</entry>
+	<entry>
+		<string><![CDATA[        BPE = unchecked((int)0x2),]]></string>
+		<comment>
+			<![CDATA[/// <summary>
+        /// Use BPE model for the tokenizer.
+        /// </summary>]]>
+		</comment>
+	</entry>
+	<entry>
+		<string><![CDATA[    [global::WinRT.WindowsRuntimeType("Paoldev.OfflineTextTranslator")][global::WinRT.WindowsRuntimeHelperType(typeof(global::ABI.Paoldev.OfflineTextTranslator.TranslatorOptions))]public struct TranslatorOptions: IEquatable<TranslatorOptions>]]></string>
+		<comment>
+			<![CDATA[/// <summary>
+        /// Options to inizialize the translator class.
+        /// </summary>]]>
+		</comment>
+	</entry>
+	<entry>
+		<string><![CDATA[        public TokenizerType TokenizerModelType;]]></string>
+		<comment>
+			<![CDATA[/// <summary>
+        /// The tokenizer model type; one of <see cref='TokenizerType' />.
+        /// </summary>]]>
+		</comment>
+	</entry>
+	<entry>
+		<string><![CDATA[        public string TokenizerModelFilePath;]]></string>
+		<comment>
+			<![CDATA[/// <summary>
+        /// The model file path (absolute or relative to the application working directory) to pass to the tokenizer; valid only if <see cref='TokenizerModelType' /> is <see cref='TokenizerType.SentencePiece' /> or <see cref='TokenizerType.BPE' />. />.
+        /// </summary>]]>
+		</comment>
+	</entry>
+	<entry>
+		<string><![CDATA[        public string CTranslate2ModelDirectoryPath;]]></string>
+		<comment>
+			<![CDATA[/// <summary>
+        /// The directory of 'ctranslate2' model datas.
+        /// </summary>]]>
+		</comment>
+	</entry>
+	<entry>
+		<string><![CDATA[        public TranslatorOptions(TokenizerType _TokenizerModelType, string _TokenizerModelFilePath, string _CTranslate2ModelDirectoryPath)]]></string>
+		<comment>
+			<![CDATA[/// <summary>
+        /// This constructor initializes the new TranslatorOptions to
+        /// (<paramref name="_TokenizerModelType"/>, <paramref name="_TokenizerModelFilePath"/>, <paramref name="_CTranslate2ModelDirectoryPath"/>).
+        /// </summary>
+        /// <param name="_TokenizerModelType">The tokenizer model type; one of <see cref='TokenizerType' />.</param>
+        /// <param name="_TokenizerModelFilePath">The model file path (absolute or relative to the application working directory) to pass to the tokenizer; valid only if <see cref='TokenizerModelType' /> is <see cref='TokenizerType.SentencePiece' /> or <see cref='TokenizerType.BPE' />.</param>
+        /// <param name="_CTranslate2ModelDirectoryPath">The directory of 'ctranslate2' model datas.</param>]]>
+		</comment>
+	</entry>
+	<entry>
+		<string><![CDATA[        public static bool operator ==(TranslatorOptions x, TranslatorOptions y) => x.TokenizerModelType == y.TokenizerModelType && x.TokenizerModelFilePath == y.TokenizerModelFilePath && x.CTranslate2ModelDirectoryPath == y.CTranslate2ModelDirectoryPath;]]></string>
+		<comment>
+			<![CDATA[/// <inheritdoc/>]]>
+		</comment>
+	</entry>
+	<entry>
+		<string><![CDATA[        public static bool operator !=(TranslatorOptions x, TranslatorOptions y) => !(x == y);]]></string>
+		<comment>
+			<![CDATA[/// <inheritdoc/>]]>
+		</comment>
+	</entry>
+	<entry>
+		<string><![CDATA[        public bool Equals(TranslatorOptions other) => this == other;]]></string>
+		<comment>
+			<![CDATA[/// <inheritdoc/>]]>
+		</comment>
+	</entry>
+	<entry>
+		<string><![CDATA[        public override bool Equals(object obj) => obj is TranslatorOptions that && this == that;]]></string>
+		<comment>
+			<![CDATA[/// <inheritdoc/>]]>
+		</comment>
+	</entry>
+	<entry>
+		<string><![CDATA[        public override int GetHashCode() => TokenizerModelType.GetHashCode() ^ TokenizerModelFilePath.GetHashCode() ^ CTranslate2ModelDirectoryPath.GetHashCode();]]></string>
+		<comment>
+			<![CDATA[/// <inheritdoc/>]]>
+		</comment>
+	</entry>
+	<entry>
+		<string><![CDATA[    [global::WinRT.WindowsRuntimeType("Paoldev.OfflineTextTranslator")][Guid("]]></string>
+		<comment>
+			<![CDATA[/// <summary>
+        /// The ITranslator public interface
+        /// </summary>]]>
+		</comment>
+	</entry>
+
+
+	<entry>
+		<string><![CDATA[    [global::WinRT.WindowsRuntimeType("Paoldev.OfflineTextTranslator")][global::WinRT.WindowsRuntimeHelperType(typeof(global::ABI.Paoldev.OfflineTextTranslator.Translator))]]]></string>
+		<comment>
+			<![CDATA[/// <summary>
+        /// The Translator class
+        /// </summary>]]>
+		</comment>
+	</entry>
+	<entry>
+		<string><![CDATA[        [global::Windows.Foundation.Metadata.DefaultOverload]]]></string>
+		<comment>
+			<![CDATA[/// <summary>
+        /// Translate a string from source language to destination language.
+        /// sourceLanguage and destLanguage MUST be already formatted with model-specific prefixes; they may be empty.
+        /// Exceptions may be thrown.
+        /// </summary>
+        /// <param name="sourceText">the source string to be translated.</param>
+        /// <param name="sourceLanguage">the source string language, already formatted with model-specific prefix; it may be empty.</param>
+        /// <param name="destLanguage">the desired translation language, already formatted with model-specific prefix; it may be empty.</param>
+        /// <returns>The translated string.</returns>]]>
+		</comment>
+	</entry>
+	<entry>
+		<string><![CDATA[        public global::Windows.Foundation.IAsyncOperation<string> TranslateAsync(string sourceText, string sourceLanguage, string destLanguage) => global::ABI.Paoldev.OfflineTextTranslator.ITranslatorMethods.TranslateAsync(_objRef_global__Paoldev_OfflineTextTranslator_ITranslator, sourceText, sourceLanguage, destLanguage);]]></string>
+		<comment>
+			<![CDATA[/// <summary>
+        /// Translate a string from source language to destination language.
+        /// sourceLanguage and destLanguage MUST be already formatted with model-specific prefixes; they may be empty.
+        /// Exceptions may be thrown.
+        /// </summary>
+        /// <param name="sourceText">the source string to be translated.</param>
+        /// <param name="sourceLanguage">the source string language, already formatted with model-specific prefix; it may be empty.</param>
+        /// <param name="destLanguage">the desired translation language, already formatted with model-specific prefix; it may be empty.</param>
+        /// <returns>The translated string.</returns>]]>
+		</comment>
+	</entry>
+	<entry>
+		<string><![CDATA[        [global::Windows.Foundation.Metadata.Overload(@"TranslateAsync2")]]]></string>
+		<comment>
+			<![CDATA[/// <summary>
+        /// Translate a string from source language to many destination languages.
+        /// sourceLanguage and destLanguages MUST be already formatted with model-specific prefixes; they may be empty.
+        /// Exceptions may be thrown.
+        /// </summary>
+        /// <param name="sourceText">the source string to be translated.</param>
+        /// <param name="sourceLanguage">the source string language, already formatted with model-specific prefix; it may be empty.</param>
+        /// <param name="destLanguages">the desired translation languages, already formatted with model-specific prefix; it may be an empty array or some of its elements may be empty.</param>
+        /// <returns>The string translated to many languages; the output array size matches destLanguages size.</returns>]]>
+		</comment>
+	</entry>
+	<entry>
+		<string><![CDATA[        public global::Windows.Foundation.IAsyncOperation<global::System.Collections.Generic.IList<string>> TranslateAsync(string sourceText, string sourceLanguage, global::System.Collections.Generic.IList<string> destLanguages) => global::ABI.Paoldev.OfflineTextTranslator.ITranslatorMethods.TranslateAsync(_objRef_global__Paoldev_OfflineTextTranslator_ITranslator, sourceText, sourceLanguage, destLanguages);]]></string>
+		<comment>
+			<![CDATA[/// <summary>
+        /// Translate a string from source language to many destination languages.
+        /// sourceLanguage and destLanguages MUST be already formatted with model-specific prefixes; they may be empty.
+        /// Exceptions may be thrown.
+        /// </summary>
+        /// <param name="sourceText">the source string to be translated.</param>
+        /// <param name="sourceLanguage">the source string language, already formatted with model-specific prefix; it may be empty.</param>
+        /// <param name="destLanguages">the desired translation languages, already formatted with model-specific prefix; it may be an empty array or some of its elements may be empty.</param>
+        /// <returns>The string translated to many languages; the output array size matches destLanguages size.</returns>]]>
+		</comment>
+	</entry>
+	<entry>
+		<string><![CDATA[        [global::Windows.Foundation.Metadata.Overload(@"TranslateAsync3")]]]></string>
+		<comment>
+			<![CDATA[/// <summary>
+        /// Translate many strings from source language to destination language.
+        /// sourceLanguage and destLanguage MUST be already formatted with model-specific prefixes; they may be empty.
+        /// Exceptions may be thrown.
+        /// </summary>
+        /// <param name="sourceTexts">the source strings to be translated.</param>
+        /// <param name="sourceLanguage">the source strings language, already formatted with model-specific prefix; it may be empty.</param>
+        /// <param name="destLanguage">the desired translation language, already formatted with model-specific prefix; it may be empty.</param>
+        /// <returns>The translated strings; the output array size matches sourceTexts size.</returns>]]>
+		</comment>
+	</entry>
+	<entry>
+		<string><![CDATA[        public global::Windows.Foundation.IAsyncOperation<global::System.Collections.Generic.IList<string>> TranslateAsync(global::System.Collections.Generic.IList<string> sourceTexts, string sourceLanguage, string destLanguage) => global::ABI.Paoldev.OfflineTextTranslator.ITranslatorMethods.TranslateAsync(_objRef_global__Paoldev_OfflineTextTranslator_ITranslator, sourceTexts, sourceLanguage, destLanguage);]]></string>
+		<comment>
+			<![CDATA[/// <summary>
+        /// Translate many strings from source language to destination language.
+        /// sourceLanguage and destLanguage MUST be already formatted with model-specific prefixes; they may be empty.
+        /// Exceptions may be thrown.
+        /// </summary>
+        /// <param name="sourceTexts">the source strings to be translated.</param>
+        /// <param name="sourceLanguage">the source strings language, already formatted with model-specific prefix; it may be empty.</param>
+        /// <param name="destLanguage">the desired translation language, already formatted with model-specific prefix; it may be empty.</param>
+        /// <returns>The translated strings; the output array size matches sourceTexts size.</returns>]]>
+		</comment>
+	</entry>
+	
+	<entry>
+		<string><![CDATA[        [global::Windows.Foundation.Metadata.Overload(@"TranslateAsync4")]]]></string>
+		<comment>
+			<![CDATA[/// <summary>
+        /// Translate many strings, each one with a specific source language, to the same destination language.
+        /// sourceLanguages and destLanguage MUST be already formatted with model-specific prefixes; they may be empty.
+        /// sourceLanguages array can be empty; otherwise its size MUST match sourceTexts size.
+        /// Exceptions may be thrown.
+        /// </summary>
+        /// <param name="sourceTexts">the source strings to be translated.</param>
+        /// <param name="sourceLanguages">the source strings language, already formatted with model-specific prefix; it may be empty, otherwise its size MUST match sourceTexts size.</param>
+        /// <param name="destLanguage">the desired translation language, already formatted with model-specific prefix; it may be empty.</param>
+        /// <returns>The strings all translated to the same language; the output array size matches sourceTexts size.</returns>]]>
+		</comment>
+	</entry>
+	<entry>
+		<string><![CDATA[        public global::Windows.Foundation.IAsyncOperation<global::System.Collections.Generic.IList<string>> TranslateAsync(global::System.Collections.Generic.IList<string> sourceTexts, global::System.Collections.Generic.IList<string> sourceLanguages, string destLanguage) => global::ABI.Paoldev.OfflineTextTranslator.ITranslatorMethods.TranslateAsync(_objRef_global__Paoldev_OfflineTextTranslator_ITranslator, sourceTexts, sourceLanguages, destLanguage);]]></string>
+		<comment>
+			<![CDATA[/// <summary>
+        /// Translate many strings, each one with a specific source language, to the same destination language.
+        /// sourceLanguages and destLanguage MUST be already formatted with model-specific prefixes; they may be empty.
+        /// sourceLanguages array can be empty; otherwise its size MUST match sourceTexts size.
+        /// Exceptions may be thrown.
+        /// </summary>
+        /// <param name="sourceTexts">the source strings to be translated.</param>
+        /// <param name="sourceLanguages">the source strings language, already formatted with model-specific prefix; it may be empty, otherwise its size MUST match sourceTexts size.</param>
+        /// <param name="destLanguage">the desired translation language, already formatted with model-specific prefix; it may be empty.</param>
+        /// <returns>The strings all translated to the same language; the output array size matches sourceTexts size.</returns>]]>
+		</comment>
+	</entry>
+	<entry>
+		<string><![CDATA[        [global::Windows.Foundation.Metadata.Overload(@"TranslateAsync5")]]]></string>
+		<comment>
+			<![CDATA[/// <summary>
+        /// Translate many strings, each one with a specific source language, to a specific destination language each one.
+        /// sourceLanguages and destLanguages MUST be already formatted with model-specific prefixes; they may be empty.
+        /// sourceLanguages and/or destLanguages array can be empty; otherwise their size MUST match sourceTexts size.
+        /// Exceptions may be thrown.
+        /// </summary>
+        /// <param name="sourceTexts">the source strings to be translated.</param>
+        /// <param name="sourceLanguages">the source strings language, already formatted with model-specific prefix; it may be an empty array, otherwise its size MUST match sourceTexts size and some of its elements may be empty.</param>
+        /// <param name="destLanguages">the desired translation languages, already formatted with model-specific prefix; it may be an empty array, otherwise its size MUST match sourceTexts size and some of its elements may be empty.</param>
+        /// <returns>The strings translated to their specific destination language; the output array size matches sourceTexts size.</returns>]]>
+		</comment>
+	</entry>
+	<entry>
+		<string><![CDATA[        public global::Windows.Foundation.IAsyncOperation<global::System.Collections.Generic.IList<string>> TranslateAsync(global::System.Collections.Generic.IList<string> sourceTexts, global::System.Collections.Generic.IList<string> sourceLanguages, global::System.Collections.Generic.IList<string> destLanguages) => global::ABI.Paoldev.OfflineTextTranslator.ITranslatorMethods.TranslateAsync(_objRef_global__Paoldev_OfflineTextTranslator_ITranslator, sourceTexts, sourceLanguages, destLanguages);]]></string>
+		<comment>
+			<![CDATA[/// <summary>
+        /// Translate many strings, each one with a specific source language, to a specific destination language each one.
+        /// sourceLanguages and destLanguages MUST be already formatted with model-specific prefixes; they may be empty.
+        /// sourceLanguages and/or destLanguages array can be empty; otherwise their size MUST match sourceTexts size.
+        /// Exceptions may be thrown.
+        /// </summary>
+        /// <param name="sourceTexts">the source strings to be translated.</param>
+        /// <param name="sourceLanguages">the source strings language, already formatted with model-specific prefix; it may be an empty array, otherwise its size MUST match sourceTexts size and some of its elements may be empty.</param>
+        /// <param name="destLanguages">the desired translation languages, already formatted with model-specific prefix; it may be an empty array, otherwise its size MUST match sourceTexts size and some of its elements may be empty.</param>
+        /// <returns>The strings translated to their specific destination language; the output array size matches sourceTexts size.</returns>]]>
+		</comment>
+	</entry>
+	<entry>
+		<string><![CDATA[        global::Windows.Foundation.IAsyncOperation<global::System.Collections.Generic.IList<string>> MultiTranslateAsync(global::System.Collections.Generic.IList<string> sourceTexts, global::System.Collections.Generic.IList<string> sourceLanguages, global::System.Collections.Generic.IList<string> destLanguages);]]></string>
+		<comment>
+			<![CDATA[/// <summary>
+        /// Translate many strings, each one with a specific source language, to all specified destination languages.
+        /// sourceLanguages and destLanguages MUST be already formatted with model-specific prefixes; they may be empty.
+        /// sourceLanguages array can be empty; otherwise its size MUST match sourceTexts size.
+        /// destLanguages array can be empty or it can be of any size.
+        /// Exceptions may be thrown.
+        /// </summary>
+        /// <param name="sourceTexts">the source strings to be translated.</param>
+        /// <param name="sourceLanguages">the source strings language, already formatted with model-specific prefix; it may be empty, otherwise its size MUST match sourceTexts size.</param>
+        /// <param name="destLanguages">the desired translation languages for each source string.</param>
+        /// <returns>The strings each one translated to all specified destination languages; the output array size is the product of sourceTexts size and destLanguages size. To access the N-th translation of the M-th source string, the required index is "M * sourceTexts.size() + N" (where M and N are zero-based indices).
+        /// If destLanguages is empty, the output array size matches sourceTexts size and each source string has just one translation (as if destLanguages was an array of 1 element containing an empty string as destination language).</returns>]]>
+		</comment>
+	</entry>
+	<entry>
+		<string><![CDATA[        public global::Windows.Foundation.IAsyncOperation<global::System.Collections.Generic.IList<string>> MultiTranslateAsync(global::System.Collections.Generic.IList<string> sourceTexts, global::System.Collections.Generic.IList<string> sourceLanguages, global::System.Collections.Generic.IList<string> destLanguages) => global::ABI.Paoldev.OfflineTextTranslator.ITranslatorMethods.MultiTranslateAsync(_objRef_global__Paoldev_OfflineTextTranslator_ITranslator, sourceTexts, sourceLanguages, destLanguages);]]></string>
+		<comment>
+			<![CDATA[/// <summary>
+        /// Translate many strings, each one with a specific source language, to all specified destination languages.
+        /// sourceLanguages and destLanguages MUST be already formatted with model-specific prefixes; they may be empty.
+        /// sourceLanguages array can be empty; otherwise its size MUST match sourceTexts size.
+        /// destLanguages array can be empty or it can be of any size.
+        /// Exceptions may be thrown.
+        /// </summary>
+        /// <param name="sourceTexts">the source strings to be translated.</param>
+        /// <param name="sourceLanguages">the source strings language, already formatted with model-specific prefix; it may be empty, otherwise its size MUST match sourceTexts size.</param>
+        /// <param name="destLanguages">the desired translation languages for each source string.</param>
+        /// <returns>The strings each one translated to all specified destination languages; the output array size is the product of sourceTexts size and destLanguages size. To access the N-th translation of the M-th source string, the required index is "M * sourceTexts.size() + N" (where M and N are zero-based indices).
+        /// If destLanguages is empty, the output array size matches sourceTexts size and each source string has just one translation (as if destLanguages was an array of 1 element containing an empty string as destination language).</returns>]]>
+		</comment>
+	</entry>
+	<entry>
+		<string><![CDATA[        public static I As<I>() => ActivationFactory<Translator>.AsInterface<I>();]]></string>
+		<comment>
+			<![CDATA[/// <inheritdoc/>]]>
+		</comment>
+	</entry>
+	<entry>
+		<string><![CDATA[        public static global::Windows.Foundation.IAsyncOperation<ITranslator> CreateAsync(TranslatorOptions options)]]></string>
+		<comment>
+			<![CDATA[/// <summary>
+        /// The costruction factory
+        /// </summary>
+        /// <param name="options">The options to initialize both the internal'tokenizer' and 'ctranslate2' libraries.</param>
+        /// <returns>The Translator instance.</returns>]]>
+		</comment>
+	</entry>
+	<entry>
+		<string><![CDATA[        public static Translator FromAbi(IntPtr thisPtr)]]></string>
+		<comment>
+			<![CDATA[/// <inheritdoc/>]]>
+		</comment>
+	</entry>
+	<entry>
+		<string><![CDATA[        public static bool operator ==(Translator x, Translator y) => (x?.ThisPtr ?? IntPtr.Zero) == (y?.ThisPtr ?? IntPtr.Zero);]]></string>
+		<comment>
+			<![CDATA[/// <inheritdoc/>]]>
+		</comment>
+	</entry>
+	<entry>
+		<string><![CDATA[        public static bool operator !=(Translator x, Translator y) => !(x == y);]]></string>
+		<comment>
+			<![CDATA[/// <inheritdoc/>]]>
+		</comment>
+	</entry>
+	<entry>
+		<string><![CDATA[        public bool Equals(Translator other) => this == other;]]></string>
+		<comment>
+			<![CDATA[/// <inheritdoc/>]]>
+		</comment>
+	</entry>
+	<entry>
+		<string><![CDATA[        public override bool Equals(object obj) => obj is Translator that && this == that;]]></string>
+		<comment>
+			<![CDATA[/// <inheritdoc/>]]>
+		</comment>
+	</entry>
+	<entry>
+		<string><![CDATA[        public override int GetHashCode() => ThisPtr.GetHashCode();]]></string>
+		<comment>
+			<![CDATA[/// <inheritdoc/>]]>
+		</comment>
+	</entry>
+	<entry>
+		<string><![CDATA[#pragma warning disable CA1416]]></string>
+		<comment>
+			<![CDATA[#pragma warning disable CS1591]]>
+		</comment>
+	</entry>
+	<entry>
+		<string><![CDATA[#pragma warning restore CA1416]]></string>
+		<comment>
+			<![CDATA[#pragma warning restore CS1591]]>
+		</comment>
+	</entry>
+</comments>
