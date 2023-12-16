@@ -1,6 +1,6 @@
 {
   "$schema": "https://raw.githubusercontent.com/microsoft/vcpkg-tool/main/docs/vcpkg.schema.json",
-  "builtin-baseline": "000d1bda1ffa95a73e0b40334fa4103d6f4d3d48",
+  "builtin-baseline": "0e47c1985273129e4d0ee52ff73bed9125555de8",
   "dependencies": [
     {
       "name": "tokenizer",
@@ -8,9 +8,12 @@
     },
     {
       "name": "ctranslate2",
-      "version>=": "3.17.1",
+      "version>=": "3.23.0",
       "default-features": false,
-      "features": [ "cpu-dispatch", "dnnl" ]
+      "features": [
+        "cpu-dispatch",
+        "dnnl"
+      ]
     }
   ],
   "homepage": "https://github.com/paoldev/Paoldev.OfflineTextTranslator",
@@ -18,8 +21,8 @@
   "maintainers": "paoldev",
   "supports": "windows & x64",
   "vcpkg-configuration": {
-    "registries": [
-    ],
-    "overlay-ports": [ "./vcpkg-custom-overlays/ports" ]
+    "overlay-ports": [
+      "./vcpkg-custom-overlays/ports"
+    ]
   }
 }
