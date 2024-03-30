@@ -83,6 +83,12 @@
 		</comment>
 	</entry>
 	<entry>
+		<string><![CDATA[        public static I As<I>() => ActivationFactory.Get("Paoldev.OfflineTextTranslator.Translator").AsInterface<I>();]]></string>
+		<comment>
+			<![CDATA[/// <inheritdoc/>]]>
+		</comment>
+	</entry>
+	<entry>
 		<string><![CDATA[        public static bool operator !=(TranslatorOptions x, TranslatorOptions y) => !(x == y);]]></string>
 		<comment>
 			<![CDATA[/// <inheritdoc/>]]>
