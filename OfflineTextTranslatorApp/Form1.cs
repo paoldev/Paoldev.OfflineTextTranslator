@@ -1,4 +1,3 @@
-using Paoldev.OfflineTextTranslator;
 using System.Diagnostics;
 
 namespace OfflineTextTranslatorApp
