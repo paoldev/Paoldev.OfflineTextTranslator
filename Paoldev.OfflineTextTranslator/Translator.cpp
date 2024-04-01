@@ -69,7 +69,22 @@ namespace winrt::Paoldev::OfflineTextTranslator::implementation
 
 		m_tokenizer = std::make_unique<onmt::Tokenizer>(tokenizerOptions, subword_encoder);
 
-		m_translator = std::make_unique<ctranslate2::Translator>(to_string(options.CTranslate2ModelDirectoryPath), ctranslate2::Device::CPU);
+		ctranslate2::Device device{};
+		switch (options.Device)
+		{
+		case DeviceType::Cpu:
+			device = ctranslate2::Device::CPU;
+			break;
+
+		case DeviceType::Cuda:
+			device = ctranslate2::Device::CUDA;
+			break;
+
+		default:
+			device = ctranslate2::str_to_device("auto");
+			break;
+		}
+		m_translator = std::make_unique<ctranslate2::Translator>(to_string(options.CTranslate2ModelDirectoryPath), device);
 	}
 
 	/// <summary>

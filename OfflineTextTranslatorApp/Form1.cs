@@ -1,3 +1,4 @@
+using Paoldev.OfflineTextTranslator;
 using System.Diagnostics;
 
 namespace OfflineTextTranslatorApp
@@ -18,6 +19,8 @@ namespace OfflineTextTranslatorApp
         private string _TokenizerModelFilePath = string.Empty;
         private string _CTranslate2ModelDirectoryPath = string.Empty;
         private Paoldev.OfflineTextTranslator.TokenizerType _TokenizerModelFileType = Paoldev.OfflineTextTranslator.TokenizerType.None;
+        private Paoldev.OfflineTextTranslator.DeviceType _DeviceType = Paoldev.OfflineTextTranslator.DeviceType.Auto;
+
         public Form1()
         {
             InitializeComponent();
@@ -76,6 +79,7 @@ namespace OfflineTextTranslatorApp
             {
                 var options = new Paoldev.OfflineTextTranslator.TranslatorOptions
                 {
+                    Device = _DeviceType,
                     TokenizerModelType = _TokenizerModelFileType,
                     TokenizerModelFilePath = _TokenizerModelFilePath,
                     CTranslate2ModelDirectoryPath = _CTranslate2ModelDirectoryPath
@@ -135,6 +139,7 @@ namespace OfflineTextTranslatorApp
                     (!string.IsNullOrEmpty(sExtraError) ? (sExtraError + Environment.NewLine + Environment.NewLine) : string.Empty) +
                     $"Error initializing the translator with following parameters:" + Environment.NewLine + Environment.NewLine +
                     $"Language Description File: {_LanguageFilePath}" + Environment.NewLine + Environment.NewLine +
+                    $"Device Type: {_DeviceType}" + Environment.NewLine + Environment.NewLine +
                     $"Tokenizer Model Type: {_TokenizerModelFileType}" + Environment.NewLine + Environment.NewLine +
                     $"Tokenizer Model File: {_TokenizerModelFilePath}" + Environment.NewLine + Environment.NewLine +
                     $"CTranslate2 Model Directory: {_CTranslate2ModelDirectoryPath}" + Environment.NewLine + Environment.NewLine +
@@ -289,6 +294,7 @@ namespace OfflineTextTranslatorApp
             {
                 StartPosition = FormStartPosition.CenterParent,
                 LanguageFile = _LanguageFilePath,
+                Device = _DeviceType,
                 TokenizerModelFile = _TokenizerModelFilePath,
                 TokenizerModelFileType = _TokenizerModelFileType,
                 CTranslate2Directory = _CTranslate2ModelDirectoryPath
@@ -296,6 +302,7 @@ namespace OfflineTextTranslatorApp
             if (config.ShowDialog(this) == DialogResult.OK)
             {
                 _LanguageFilePath = config.LanguageFile;
+                _DeviceType = config.Device;
                 _TokenizerModelFilePath = config.TokenizerModelFile;
                 _TokenizerModelFileType = config.TokenizerModelFileType;
                 _CTranslate2ModelDirectoryPath = config.CTranslate2Directory;
@@ -308,6 +315,7 @@ namespace OfflineTextTranslatorApp
         {
             return
                 string.IsNullOrEmpty(_LanguageFilePath) &&
+                (_DeviceType == Paoldev.OfflineTextTranslator.DeviceType.Auto) &&
                 string.IsNullOrEmpty(_TokenizerModelFilePath) &&
                 (_TokenizerModelFileType == Paoldev.OfflineTextTranslator.TokenizerType.None) &&
                 string.IsNullOrEmpty(_CTranslate2ModelDirectoryPath);
@@ -321,6 +329,7 @@ namespace OfflineTextTranslatorApp
                 _TokenizerModelFilePath = Properties.Settings.Default.TokenizerModelFilePath;
                 _CTranslate2ModelDirectoryPath = Properties.Settings.Default.CTranslate2ModelDirectory;
                 _TokenizerModelFileType = Properties.Settings.Default.TokenizerType;
+                _DeviceType = Properties.Settings.Default.Device;
             }
             catch (Exception ex)
             {

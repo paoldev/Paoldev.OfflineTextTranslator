@@ -2,6 +2,28 @@
 namespace Paoldev.OfflineTextTranslator
 {
     /// <summary>
+    /// The type of the device to use for translation algorithm.
+    /// </summary>
+    enum DeviceType
+    {
+        /// <summary>
+        /// Automatically detect the device type.
+        /// </summary>
+        Auto = 0,
+
+        /// <summary>
+        /// Use Cpu device.
+        /// </summary>
+        Cpu,
+
+        /// <summary>
+        /// Use Cuda device.
+        /// It may generate exceptions if cuda is not available.
+        /// </summary>
+        Cuda
+    };
+
+    /// <summary>
     /// The type of the model passed to the tokenizer.
     /// </summary>
     enum TokenizerType
@@ -27,6 +49,11 @@ namespace Paoldev.OfflineTextTranslator
     /// </summary>
     struct TranslatorOptions
     {
+        /// <summary>
+        /// The device type; one of <see cref='DeviceType' />.
+        /// </summary>
+        DeviceType Device;
+
         /// <summary>
         /// The tokenizer model type; one of <see cref='TokenizerType' />.
         /// </summary>

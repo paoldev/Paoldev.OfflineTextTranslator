@@ -10,9 +10,13 @@ namespace OfflineTextTranslatorApp
 
             comboBoxTokenizerModelFile.DataSource = Enum.GetValues(typeof(TokenizerType));
             comboBoxTokenizerModelFile.SelectedItem = TokenizerType.None;
+
+            comboBoxDeviceType.DataSource = Enum.GetValues(typeof(DeviceType));
+            comboBoxDeviceType.SelectedItem = DeviceType.Auto;
         }
 
         public string LanguageFile { get => textBoxLanguageFile.Text; set => textBoxLanguageFile.Text = value; }
+        public DeviceType Device { get => (DeviceType)(comboBoxDeviceType.SelectedItem ?? DeviceType.Auto); set => comboBoxDeviceType.SelectedItem = value; }
         public string TokenizerModelFile { get => textBoxTokenizerModelFile.Text; set => textBoxTokenizerModelFile.Text = value; }
         public TokenizerType TokenizerModelFileType { get => (TokenizerType)(comboBoxTokenizerModelFile.SelectedItem ?? TokenizerType.None); set => comboBoxTokenizerModelFile.SelectedItem = value; }
         public string CTranslate2Directory { get => textBoxCTranslate2Directory.Text; set => textBoxCTranslate2Directory.Text = value; }
@@ -49,6 +53,7 @@ namespace OfflineTextTranslatorApp
         private void OnbuttonOk_Click(object sender, EventArgs e)
         {
             Properties.Settings.Default.LanguageDescriptionFile = LanguageFile;
+            Properties.Settings.Default.Device = Device;
             Properties.Settings.Default.TokenizerModelFilePath = TokenizerModelFile;
             Properties.Settings.Default.CTranslate2ModelDirectory = CTranslate2Directory;
             Properties.Settings.Default.TokenizerType = TokenizerModelFileType;

@@ -18,6 +18,20 @@
             //
         }
 
+        public Paoldev.OfflineTextTranslator.DeviceType Device
+        {
+            get
+            {
+                //It may throw an exception if the string is invalid; but it's catched by ReadInitialAppSettings().
+                return Enum.Parse<Paoldev.OfflineTextTranslator.DeviceType>(DeviceType);
+            }
+
+            set
+            {
+                DeviceType = value.ToString();
+            }
+        }
+
         public Paoldev.OfflineTextTranslator.TokenizerType TokenizerType
         {
             get

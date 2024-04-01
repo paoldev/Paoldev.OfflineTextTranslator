@@ -1,6 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <comments>
 	<entry>
+		<string><![CDATA[    [global::WinRT.WindowsRuntimeType("Paoldev.OfflineTextTranslator")]public enum DeviceType : int]]></string>
+		<comment>
+			<![CDATA[/// <summary>
+        /// The type of the device to use for translation algorithm.
+        /// </summary>]]>
+		</comment>
+	</entry>
+	<entry>
+		<string><![CDATA[        Auto = unchecked((int)0),]]></string>
+		<comment>
+			<![CDATA[/// <summary>
+        /// Automatically detect the device type.
+        /// </summary>]]>
+		</comment>
+	</entry>
+	<entry>
+		<string><![CDATA[        Cpu = unchecked((int)0x1),]]></string>
+		<comment>
+			<![CDATA[/// <summary>
+        /// Use Cpu device.
+        /// </summary>]]>
+		</comment>
+	</entry>
+	<entry>
+		<string><![CDATA[        Cuda = unchecked((int)0x2),]]></string>
+		<comment>
+			<![CDATA[/// <summary>
+        /// Use Cuda device.
+        /// It may generate exceptions if cuda is not available.
+        /// </summary>]]>
+		</comment>
+	</entry>
+	<entry>
 		<string><![CDATA[    [global::WinRT.WindowsRuntimeType("Paoldev.OfflineTextTranslator")]public enum TokenizerType : int]]></string>
 		<comment>
 			<![CDATA[/// <summary>
@@ -41,6 +74,14 @@
 		</comment>
 	</entry>
 	<entry>
+		<string><![CDATA[        public DeviceType Device;]]></string>
+		<comment>
+			<![CDATA[/// <summary>
+        /// The device type; one of <see cref='DeviceType' />.
+        /// </summary>]]>
+		</comment>
+	</entry>
+	<entry>
 		<string><![CDATA[        public TokenizerType TokenizerModelType;]]></string>
 		<comment>
 			<![CDATA[/// <summary>
@@ -65,19 +106,20 @@
 		</comment>
 	</entry>
 	<entry>
-		<string><![CDATA[        public TranslatorOptions(TokenizerType _TokenizerModelType, string _TokenizerModelFilePath, string _CTranslate2ModelDirectoryPath)]]></string>
+		<string><![CDATA[        public TranslatorOptions(DeviceType _Device, TokenizerType _TokenizerModelType, string _TokenizerModelFilePath, string _CTranslate2ModelDirectoryPath)]]></string>
 		<comment>
 			<![CDATA[/// <summary>
         /// This constructor initializes the new TranslatorOptions to
-        /// (<paramref name="_TokenizerModelType"/>, <paramref name="_TokenizerModelFilePath"/>, <paramref name="_CTranslate2ModelDirectoryPath"/>).
+        /// (<paramref name="_Device"/>, <paramref name="_TokenizerModelType"/>, <paramref name="_TokenizerModelFilePath"/>, <paramref name="_CTranslate2ModelDirectoryPath"/>).
         /// </summary>
+        /// <param name="_Device">The device type; one of <see cref='DeviceType' />.</param>
         /// <param name="_TokenizerModelType">The tokenizer model type; one of <see cref='TokenizerType' />.</param>
         /// <param name="_TokenizerModelFilePath">The model file path (absolute or relative to the application working directory) to pass to the tokenizer; valid only if <see cref='TokenizerModelType' /> is <see cref='TokenizerType.SentencePiece' /> or <see cref='TokenizerType.BPE' />.</param>
         /// <param name="_CTranslate2ModelDirectoryPath">The directory of 'ctranslate2' model datas.</param>]]>
 		</comment>
 	</entry>
 	<entry>
-		<string><![CDATA[        public static bool operator ==(TranslatorOptions x, TranslatorOptions y) => x.TokenizerModelType == y.TokenizerModelType && x.TokenizerModelFilePath == y.TokenizerModelFilePath && x.CTranslate2ModelDirectoryPath == y.CTranslate2ModelDirectoryPath;]]></string>
+		<string><![CDATA[        public static bool operator ==(TranslatorOptions x, TranslatorOptions y) => x.Device == y.Device && x.TokenizerModelType == y.TokenizerModelType && x.TokenizerModelFilePath == y.TokenizerModelFilePath && x.CTranslate2ModelDirectoryPath == y.CTranslate2ModelDirectoryPath;]]></string>
 		<comment>
 			<![CDATA[/// <inheritdoc/>]]>
 		</comment>
@@ -107,7 +149,7 @@
 		</comment>
 	</entry>
 	<entry>
-		<string><![CDATA[        public override int GetHashCode() => TokenizerModelType.GetHashCode() ^ TokenizerModelFilePath.GetHashCode() ^ CTranslate2ModelDirectoryPath.GetHashCode();]]></string>
+		<string><![CDATA[        public override int GetHashCode() => Device.GetHashCode() ^ TokenizerModelType.GetHashCode() ^ TokenizerModelFilePath.GetHashCode() ^ CTranslate2ModelDirectoryPath.GetHashCode();]]></string>
 		<comment>
 			<![CDATA[/// <inheritdoc/>]]>
 		</comment>
