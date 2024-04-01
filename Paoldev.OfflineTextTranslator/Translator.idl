@@ -14,13 +14,7 @@ namespace Paoldev.OfflineTextTranslator
         /// <summary>
         /// Use Cpu device.
         /// </summary>
-        Cpu,
-
-        /// <summary>
-        /// Use Cuda device.
-        /// It may generate exceptions if cuda is not available.
-        /// </summary>
-        Cuda
+        Cpu
     };
 
     /// <summary>

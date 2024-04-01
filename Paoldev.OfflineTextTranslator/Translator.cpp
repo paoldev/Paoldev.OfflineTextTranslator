@@ -76,11 +76,8 @@ namespace winrt::Paoldev::OfflineTextTranslator::implementation
 			device = ctranslate2::Device::CPU;
 			break;
 
-		case DeviceType::Cuda:
-			device = ctranslate2::Device::CUDA;
-			break;
-
 		default:
+			// cuda will be automatically selected if it's available.
 			device = ctranslate2::str_to_device("auto");
 			break;
 		}

@@ -25,15 +25,6 @@
 		</comment>
 	</entry>
 	<entry>
-		<string><![CDATA[        Cuda = unchecked((int)0x2),]]></string>
-		<comment>
-			<![CDATA[/// <summary>
-        /// Use Cuda device.
-        /// It may generate exceptions if cuda is not available.
-        /// </summary>]]>
-		</comment>
-	</entry>
-	<entry>
 		<string><![CDATA[    [global::WinRT.WindowsRuntimeType("Paoldev.OfflineTextTranslator")]public enum TokenizerType : int]]></string>
 		<comment>
 			<![CDATA[/// <summary>
