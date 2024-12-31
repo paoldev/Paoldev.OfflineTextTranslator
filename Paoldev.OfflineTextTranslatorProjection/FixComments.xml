@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <comments>
 	<entry>
-		<string><![CDATA[    [global::WinRT.WindowsRuntimeType("Paoldev.OfflineTextTranslator")]public enum DeviceType : int]]></string>
+		<string><![CDATA[    [global::WinRT.WindowsRuntimeType("Paoldev.OfflineTextTranslator")][global::WinRT.WinRTExposedType(typeof(global::WinRT.EnumTypeDetails<DeviceType>))]public enum DeviceType : int]]></string>
 		<comment>
 			<![CDATA[/// <summary>
         /// The type of the device to use for translation algorithm.
@@ -25,7 +25,7 @@
 		</comment>
 	</entry>
 	<entry>
-		<string><![CDATA[    [global::WinRT.WindowsRuntimeType("Paoldev.OfflineTextTranslator")]public enum TokenizerType : int]]></string>
+		<string><![CDATA[    [global::WinRT.WindowsRuntimeType("Paoldev.OfflineTextTranslator")][global::WinRT.WinRTExposedType(typeof(global::WinRT.EnumTypeDetails<TokenizerType>))]public enum TokenizerType : int]]></string>
 		<comment>
 			<![CDATA[/// <summary>
         /// The type of the model passed to the tokenizer.
@@ -57,7 +57,7 @@
 		</comment>
 	</entry>
 	<entry>
-		<string><![CDATA[    [global::WinRT.WindowsRuntimeType("Paoldev.OfflineTextTranslator")][global::WinRT.WindowsRuntimeHelperType(typeof(global::ABI.Paoldev.OfflineTextTranslator.TranslatorOptions))]public struct TranslatorOptions: IEquatable<TranslatorOptions>]]></string>
+		<string><![CDATA[    [global::WinRT.WindowsRuntimeType("Paoldev.OfflineTextTranslator", "struct(Paoldev.OfflineTextTranslator.TranslatorOptions;enum(Paoldev.OfflineTextTranslator.DeviceType;i4);enum(Paoldev.OfflineTextTranslator.TokenizerType;i4);string;string)")][global::WinRT.WindowsRuntimeHelperType(typeof(global::ABI.Paoldev.OfflineTextTranslator.TranslatorOptions))][global::WinRT.WinRTExposedType(typeof(global::WinRT.StructTypeDetails<TranslatorOptions, global::ABI.Paoldev.OfflineTextTranslator.TranslatorOptions>))]public struct TranslatorOptions: IEquatable<TranslatorOptions>]]></string>
 		<comment>
 			<![CDATA[/// <summary>
         /// Options to inizialize the translator class.
@@ -156,7 +156,9 @@
 
 
 	<entry>
-		<string><![CDATA[    [global::WinRT.WindowsRuntimeType("Paoldev.OfflineTextTranslator")][global::WinRT.WindowsRuntimeHelperType(typeof(global::ABI.Paoldev.OfflineTextTranslator.Translator))]]]></string>
+		<string>
+			<![CDATA[    [global::WinRT.WindowsRuntimeType("Paoldev.OfflineTextTranslator")]
+    [global::WinRT.WindowsRuntimeHelperType(typeof(global::ABI.Paoldev.OfflineTextTranslator.Translator))]]]></string>
 		<comment>
 			<![CDATA[/// <summary>
         /// The Translator class
