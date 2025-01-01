@@ -19,7 +19,7 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Title>Offline Text Translator</Title>
     <Authors>paoldev</Authors>
-    <Copyright>(C) 2023</Copyright>
+    <Copyright>(C) 2023 - 2025</Copyright>
     <Description>A simple component with offline text translation support</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <IncludeSymbols>False</IncludeSymbols>
