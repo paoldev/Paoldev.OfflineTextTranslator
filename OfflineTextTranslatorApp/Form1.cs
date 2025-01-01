@@ -6,7 +6,7 @@ namespace OfflineTextTranslatorApp
     {
         private Paoldev.OfflineTextTranslator.ITranslator? Translator = null;
         private string EnglishCodeForUI = "en";
-        private Dictionary<string, string> LanguagePrefixes = new();
+        private Dictionary<string, string> LanguagePrefixes = [];
         private bool Initialized = false;
 
         private readonly string _untranslatedEnglishTitle = "Offline Text Translator";
@@ -51,7 +51,7 @@ namespace OfflineTextTranslatorApp
             Translator = null;
             GC.Collect();
 
-            List<Tuple<Control, bool>> controlStates = new();
+            List<Tuple<Control, bool>> controlStates = [];
             foreach (Control c in Controls)
             {
                 if (c != null)
@@ -65,7 +65,7 @@ namespace OfflineTextTranslatorApp
 
             var languages = new List<string>();
 
-            LanguagePrefixes = new();
+            LanguagePrefixes = [];
 
             //Configuration error condition: there is no need to try to initialize the Translator in this case.
             string sExtraError = string.Empty;
@@ -108,9 +108,9 @@ namespace OfflineTextTranslatorApp
             comboBoxOutput.Items.Clear();
             comboBoxOutput2.Items.Clear();
 
-            comboBoxInput.Items.AddRange(languages.ToArray());
-            comboBoxOutput.Items.AddRange(languages.ToArray());
-            comboBoxOutput2.Items.AddRange(languages.ToArray());
+            comboBoxInput.Items.AddRange([.. languages]);
+            comboBoxOutput.Items.AddRange([.. languages]);
+            comboBoxOutput2.Items.AddRange([.. languages]);
 
             comboBoxInput.SelectedIndex = 0;
             comboBoxOutput.SelectedIndex = 0;
@@ -184,7 +184,7 @@ namespace OfflineTextTranslatorApp
                         }
                         else
                         {
-                            var res = await Translator.MultiTranslateAsync(new string[] { textBoxInput.Text }, new string[] { sourceLang }, new string[] { destLang, destLang2 });
+                            var res = await Translator.MultiTranslateAsync([textBoxInput.Text], [sourceLang], [destLang, destLang2]);
                             textBoxOutput.Text = res[0];
                             textBoxOutput2.Text = res[1];
                         }

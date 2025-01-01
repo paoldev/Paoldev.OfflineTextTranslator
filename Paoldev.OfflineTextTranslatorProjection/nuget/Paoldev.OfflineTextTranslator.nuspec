@@ -7,12 +7,12 @@
 		<description>A simple component with offline text translation support</description>
 		<readme>README.md</readme>
 		<dependencies>
-			<group targetFramework="net8.0-windows10.0.22000.0" />
+			<group targetFramework="net9.0-windows10.0.22621.0" />
 		</dependencies>
 	</metadata>
 	<files>
-		<file src="..\..\_build\x64\$Configuration$\Paoldev.OfflineTextTranslatorProjection\bin\Paoldev.OfflineTextTranslatorProjection.dll" target="lib\net8.0-windows10.0.22000.0\Paoldev.OfflineTextTranslatorProjection.dll" />
-		<file src="..\..\_build\x64\$Configuration$\Paoldev.OfflineTextTranslatorProjection\bin\Paoldev.OfflineTextTranslatorProjection.xml" target="lib\net8.0-windows10.0.22000.0\Paoldev.OfflineTextTranslatorProjection.xml" />
+		<file src="..\..\_build\x64\$Configuration$\Paoldev.OfflineTextTranslatorProjection\bin\Paoldev.OfflineTextTranslatorProjection.dll" target="lib\net9.0-windows10.0.22621.0\Paoldev.OfflineTextTranslatorProjection.dll" />
+		<file src="..\..\_build\x64\$Configuration$\Paoldev.OfflineTextTranslatorProjection\bin\Paoldev.OfflineTextTranslatorProjection.xml" target="lib\net9.0-windows10.0.22621.0\Paoldev.OfflineTextTranslatorProjection.xml" />
 		<file src="..\..\_build\x64\$Configuration$\Paoldev.OfflineTextTranslator\bin\Paoldev.OfflineTextTranslator\Paoldev.OfflineTextTranslator.dll" target="runtimes\win-x64\native\Paoldev.OfflineTextTranslator.dll" />
 		<file src="..\..\_build\x64\$Configuration$\Paoldev.OfflineTextTranslator\bin\Paoldev.OfflineTextTranslator\Paoldev.OfflineTextTranslator.xml" target="runtimes\win-x64\native\Paoldev.OfflineTextTranslator.xml" />
 		<file src=".\README.md" target="\" />

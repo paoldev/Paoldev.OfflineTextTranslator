@@ -67,7 +67,7 @@ In order to work, you have to manually download the models to initialize both th
 10. Settings will be saved in `%localappdata%\paoldev\OfflineTextTranslatorApp` folder (or similar name).  
     In case of problems running the application, delete the `user.config` file from that folder (or subfolder) and then restart the application.  
     
-`OfflineTextTranslatorApp` requires the [.NET 8.0 Runtime](https://dotnet.microsoft.com/en-us/download/dotnet/8.0); it can be automatically downloaded and installed on the application's first run.  
+`OfflineTextTranslatorApp` requires the [.NET 9.0 Runtime](https://dotnet.microsoft.com/en-us/download/dotnet/9.0); it can be automatically downloaded and installed on the application's first run.  
 
 # License
 

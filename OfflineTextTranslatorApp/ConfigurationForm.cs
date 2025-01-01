@@ -1,4 +1,5 @@
 ﻿using Paoldev.OfflineTextTranslator;
+using System.ComponentModel;
 
 namespace OfflineTextTranslatorApp
 {
@@ -8,17 +9,26 @@ namespace OfflineTextTranslatorApp
         {
             InitializeComponent();
 
-            comboBoxTokenizerModelFile.DataSource = Enum.GetValues(typeof(TokenizerType));
+            comboBoxTokenizerModelFile.DataSource = Enum.GetValues<TokenizerType>();
             comboBoxTokenizerModelFile.SelectedItem = TokenizerType.None;
 
-            comboBoxDeviceType.DataSource = Enum.GetValues(typeof(DeviceType));
+            comboBoxDeviceType.DataSource = Enum.GetValues<DeviceType>();
             comboBoxDeviceType.SelectedItem = DeviceType.Auto;
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string LanguageFile { get => textBoxLanguageFile.Text; set => textBoxLanguageFile.Text = value; }
+
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public DeviceType Device { get => (DeviceType)(comboBoxDeviceType.SelectedItem ?? DeviceType.Auto); set => comboBoxDeviceType.SelectedItem = value; }
+
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string TokenizerModelFile { get => textBoxTokenizerModelFile.Text; set => textBoxTokenizerModelFile.Text = value; }
+
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public TokenizerType TokenizerModelFileType { get => (TokenizerType)(comboBoxTokenizerModelFile.SelectedItem ?? TokenizerType.None); set => comboBoxTokenizerModelFile.SelectedItem = value; }
+
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string CTranslate2Directory { get => textBoxCTranslate2Directory.Text; set => textBoxCTranslate2Directory.Text = value; }
 
         private void OnbuttonLanguageFile_Click(object sender, EventArgs e)
