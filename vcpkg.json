@@ -1,6 +1,6 @@
 {
   "$schema": "https://raw.githubusercontent.com/microsoft/vcpkg-tool/main/docs/vcpkg.schema.json",
-  "builtin-baseline": "4b3b6201414638abfcd8ef4629dfbd958985667e",
+  "builtin-baseline": "5f8c424e267b7360d451df406eeefb3767985b17",
   "dependencies": [
     {
       "name": "tokenizer",
