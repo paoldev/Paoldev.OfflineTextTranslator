@@ -19,7 +19,7 @@
 
 namespace winrt::Paoldev::OfflineTextTranslator::implementation
 {
-	Translator::stdstring_vector to_stdstring_vector(const Translator::hstring_ivector& values)
+	static Translator::stdstring_vector to_stdstring_vector(const Translator::hstring_ivector& values)
 	{
 		Translator::stdstring_vector output;
 		output.reserve(values.Size());
@@ -29,7 +29,7 @@ namespace winrt::Paoldev::OfflineTextTranslator::implementation
 
 	winrt::Windows::Foundation::IAsyncOperation<winrt::Paoldev::OfflineTextTranslator::ITranslator> Translator::CreateAsync(const TranslatorOptions& options)
 	{
-		auto result = co_await concurrency::create_task([_options = std::move(options)]()
+		ITranslator result = co_await concurrency::create_task([_options = options]()
 			{
 				auto translator = make<Paoldev::OfflineTextTranslator::implementation::Translator>(_options);
 				return translator.as<ITranslator>();
@@ -101,7 +101,7 @@ namespace winrt::Paoldev::OfflineTextTranslator::implementation
 
 		auto strong_this{ get_strong() };
 
-		auto result = co_await concurrency::create_task([_text = std::move(text), _sourceLanguage = std::move(sourceLanguage), _destLanguage = std::move(destLanguage), strong_this]()
+		hstring_ivector result = co_await concurrency::create_task([_text = std::move(text), _sourceLanguage = std::move(sourceLanguage), _destLanguage = std::move(destLanguage), strong_this]()
 			{
 				std::vector<hstring> TranslatedBatches;
 				strong_this->TranslateInternal({ _text }, { _sourceLanguage }, { _destLanguage }, TranslatedBatches);
@@ -127,7 +127,7 @@ namespace winrt::Paoldev::OfflineTextTranslator::implementation
 
 		auto strong_this{ get_strong() };
 
-		auto result = co_await concurrency::create_task([_batches = std::move(batches), _sourceLanguage = std::move(sourceLanguage), _destLanguage = std::move(destLanguage), strong_this]()
+		hstring_ivector result = co_await concurrency::create_task([_batches = std::move(batches), _sourceLanguage = std::move(sourceLanguage), _destLanguage = std::move(destLanguage), strong_this]()
 			{
 				std::vector<hstring> TranslatedBatches;
 				strong_this->TranslateInternal(_batches, stdstring_vector(_batches.size(), _sourceLanguage), stdstring_vector(_batches.size(), _destLanguage), TranslatedBatches);
@@ -154,7 +154,7 @@ namespace winrt::Paoldev::OfflineTextTranslator::implementation
 
 		auto strong_this{ get_strong() };
 
-		auto result = co_await concurrency::create_task([_batches = std::move(batches), _sourceLanguage = std::move(sourceLanguage), _destLanguages = std::move(destLanguages), strong_this]()
+		hstring_ivector result = co_await concurrency::create_task([_batches = std::move(batches), _sourceLanguage = std::move(sourceLanguage), _destLanguages = std::move(destLanguages), strong_this]()
 			{
 				std::vector<hstring> TranslatedBatches;
 				strong_this->TranslateInternal(_batches, stdstring_vector(_batches.size(), _sourceLanguage), _destLanguages, TranslatedBatches);
@@ -182,7 +182,7 @@ namespace winrt::Paoldev::OfflineTextTranslator::implementation
 
 		auto strong_this{ get_strong() };
 
-		auto result = co_await concurrency::create_task([_batches = std::move(batches), _sourceLanguages = std::move(sourceLanguages), _destLanguage = std::move(destLanguage), strong_this]()
+		hstring_ivector result = co_await concurrency::create_task([_batches = std::move(batches), _sourceLanguages = std::move(sourceLanguages), _destLanguage = std::move(destLanguage), strong_this]()
 			{
 				std::vector<hstring> TranslatedBatches;
 				strong_this->TranslateInternal(_batches, _sourceLanguages, stdstring_vector(_batches.size(), _destLanguage), TranslatedBatches);
@@ -210,7 +210,7 @@ namespace winrt::Paoldev::OfflineTextTranslator::implementation
 
 		auto strong_this{ get_strong() };
 
-		auto result = co_await concurrency::create_task([_batches = std::move(batches), _sourceLanguages = std::move(sourceLanguages), _destLanguages = std::move(destLanguages), strong_this]()
+		hstring_ivector result = co_await concurrency::create_task([_batches = std::move(batches), _sourceLanguages = std::move(sourceLanguages), _destLanguages = std::move(destLanguages), strong_this]()
 			{
 				std::vector<hstring> TranslatedBatches;
 				strong_this->TranslateInternal(_batches, _sourceLanguages, _destLanguages, TranslatedBatches);
@@ -240,7 +240,7 @@ namespace winrt::Paoldev::OfflineTextTranslator::implementation
 
 		auto strong_this{ get_strong() };
 
-		auto result = co_await concurrency::create_task([_batches = std::move(batches), _sourceLanguages = std::move(sourceLanguages), _destLanguages = std::move(destLanguages), strong_this]()
+		hstring_ivector result = co_await concurrency::create_task([_batches = std::move(batches), _sourceLanguages = std::move(sourceLanguages), _destLanguages = std::move(destLanguages), strong_this]()
 			{
 				std::vector<hstring> TranslatedBatches;
 				strong_this->TranslateInternal(_batches, _sourceLanguages, _destLanguages, TranslatedBatches, true);
@@ -257,7 +257,7 @@ namespace winrt::Paoldev::OfflineTextTranslator::implementation
 		}
 
 		// detect if "language" prefix is needed
-		auto has_prefix = [&](const stdstring_vector& InLanguageContainer, const size_t InLanguageIndex)
+		auto has_prefix = [](const stdstring_vector& InLanguageContainer, const size_t InLanguageIndex)
 			{
 				return ((InLanguageIndex < InLanguageContainer.size()) && InLanguageContainer[InLanguageIndex].size());
 			};
