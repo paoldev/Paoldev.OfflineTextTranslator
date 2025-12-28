@@ -350,7 +350,7 @@ namespace OfflineTextTranslatorApp
             //fr
             //it
             var languageLines = await File.ReadAllLinesAsync(fileName);
-            languageLines = languageLines.Where(x => !string.IsNullOrWhiteSpace(x)).ToArray();
+            languageLines = [.. languageLines.Where(x => !string.IsNullOrWhiteSpace(x))];
             if (languageLines.Length >= 2)
             {
                 if (languageLines[0].StartsWith("language_prefix:", StringComparison.InvariantCultureIgnoreCase) &&

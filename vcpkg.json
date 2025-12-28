@@ -1,6 +1,6 @@
 {
   "$schema": "https://raw.githubusercontent.com/microsoft/vcpkg-tool/main/docs/vcpkg.schema.json",
-  "builtin-baseline": "5f8c424e267b7360d451df406eeefb3767985b17",
+  "builtin-baseline": "11bbc873e00e9e58d4e9dffb30b7a5493a030e0b",
   "dependencies": [
     {
       "name": "tokenizer",
@@ -8,7 +8,7 @@
     },
     {
       "name": "ctranslate2",
-      "version>=": "4.5.0",
+      "version>=": "4.6.2",
       "default-features": false,
       "features": [
         "cpu-dispatch",
