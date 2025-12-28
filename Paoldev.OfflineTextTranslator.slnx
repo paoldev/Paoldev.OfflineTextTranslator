@@ -1,0 +1,19 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+  </Configurations>
+  <Folder Name="/Components/">
+    <Project Path="Paoldev.OfflineTextTranslator/Paoldev.OfflineTextTranslator.vcxproj" Id="963340ea-3110-4374-a381-7486055f45c3" />
+    <Project Path="Paoldev.OfflineTextTranslatorProjection/Paoldev.OfflineTextTranslatorProjection.csproj">
+      <Platform Project="x64" />
+    </Project>
+  </Folder>
+  <Folder Name="/Solution Items/">
+    <File Path="LICENSE" />
+    <File Path="README.md" />
+    <File Path="vcpkg.json" />
+  </Folder>
+  <Project Path="OfflineTextTranslatorApp/OfflineTextTranslatorApp.csproj">
+    <Platform Project="x64" />
+  </Project>
+</Solution>
