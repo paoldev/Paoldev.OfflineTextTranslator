@@ -2,6 +2,8 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-red.svg)](./LICENSE)
 
+Offline Text Translator (c) 2023 - 2026 paoldev  
+  
 This project creates a simple .NET component to translate texts in offline mode on Windows.  
 I wrote it some time ago for personal needs and I'm not involved with any third party library used here (all of them are built through [vcpkg](https://github.com/microsoft/vcpkg) build system).
 
