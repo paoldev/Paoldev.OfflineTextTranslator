@@ -2,16 +2,6 @@
 
 #include "Translator.g.h"
 
-namespace onmt
-{
-    class Tokenizer;
-}
-
-namespace ctranslate2
-{
-    class Translator;
-}
-
 namespace winrt::Paoldev::OfflineTextTranslator::implementation
 {
     /// <summary>
@@ -26,7 +16,7 @@ namespace winrt::Paoldev::OfflineTextTranslator::implementation
         /// The costructor
         /// </summary>
         /// <param name="options">The options to initialize both the internal'tokenizer' and 'ctranslate2' libraries.</param>
-        Translator(const TranslatorOptions& options);
+        Translator(const TranslatorOptions&) {};
 
         /// <summary>
         /// The costruction factory
@@ -109,10 +99,7 @@ namespace winrt::Paoldev::OfflineTextTranslator::implementation
     private:
 
         //TODO: use std::string_view when a suitable interface will be available in low level libraries.
-        void TranslateInternal(const stdstring_vector& InBatches, const stdstring_vector& sourceLanguages, const stdstring_vector& destLanguages, std::vector<hstring>& OutTranslatedBatches, const bool InMultiTranslate = false) const;
-
-        std::unique_ptr<onmt::Tokenizer> m_tokenizer;
-        std::unique_ptr<ctranslate2::Translator> m_translator;
+        virtual void TranslateInternal(const stdstring_vector& InBatches, const stdstring_vector& sourceLanguages, const stdstring_vector& destLanguages, std::vector<hstring>& OutTranslatedBatches, const bool InMultiTranslate = false) const = 0;
     };
 }
 
