@@ -5,6 +5,7 @@
 
 # vcpkg install dir
 vcpkg_installed/
+launchSettings.json
 
 # User-specific files
 *.rsuser
