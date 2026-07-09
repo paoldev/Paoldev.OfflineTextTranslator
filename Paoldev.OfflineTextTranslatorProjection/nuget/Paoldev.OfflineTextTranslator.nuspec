@@ -15,6 +15,7 @@
 		<file src="..\..\_build\x64\$Configuration$\Paoldev.OfflineTextTranslatorProjection\bin\Paoldev.OfflineTextTranslatorProjection.xml" target="lib\net10.0-windows10.0.26100.0\Paoldev.OfflineTextTranslatorProjection.xml" />
 		<file src="..\..\_build\x64\$Configuration$\Paoldev.OfflineTextTranslator\bin\Paoldev.OfflineTextTranslator\Paoldev.OfflineTextTranslator.dll" target="runtimes\win-x64\native\Paoldev.OfflineTextTranslator.dll" />
 		<file src="..\..\_build\x64\$Configuration$\Paoldev.OfflineTextTranslator\bin\Paoldev.OfflineTextTranslator\Paoldev.OfflineTextTranslator.xml" target="runtimes\win-x64\native\Paoldev.OfflineTextTranslator.xml" />
+		<file src="..\..\_build\x64\$Configuration$\Paoldev.OfflineTextTranslator\bin\Paoldev.OfflineTextTranslator\cu*.dll" target="runtimes\win-x64\native\" />
 		<file src=".\README.md" target="\" />
 	</files>
 </package>

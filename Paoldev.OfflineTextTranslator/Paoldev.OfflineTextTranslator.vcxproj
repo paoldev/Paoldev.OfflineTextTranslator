@@ -72,14 +72,12 @@
   </PropertyGroup>
   <PropertyGroup Label="Vcpkg" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <VcpkgUseStatic>true</VcpkgUseStatic>
-    <VcpkgTriplet>x64-windows</VcpkgTriplet>
-    <VcpkgHostTriplet>
-    </VcpkgHostTriplet>
+    <VcpkgTriplet>x64-windows-v143</VcpkgTriplet>
     <VcpkgUseMD>true</VcpkgUseMD>
   </PropertyGroup>
   <PropertyGroup Label="Vcpkg" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <VcpkgUseStatic>true</VcpkgUseStatic>
-    <VcpkgTriplet>x64-windows</VcpkgTriplet>
+    <VcpkgTriplet>x64-windows-v143</VcpkgTriplet>
     <VcpkgUseMD>true</VcpkgUseMD>
   </PropertyGroup>
   <ItemDefinitionGroup>
@@ -105,6 +103,13 @@
       <GenerateXMLDocumentationFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</GenerateXMLDocumentationFiles>
       <LanguageStandard Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">stdcpp20</LanguageStandard>
     </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(VCPKG_DOWNLOADS)\tools\cuda\12.9.2\windows-x86_64\lib\x64;$(SolutionDir)vcpkg\downloads\tools\cuda\12.9.2\windows-x86_64\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">cudart.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <PostBuildEvent>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ProjectDir)postbuild-copy-cuda-redist.bat tools\cuda\12.9.2\windows-x86_64 "$(OutDir)"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)'=='Release'">
     <ClCompile>
@@ -115,7 +120,12 @@
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(VCPKG_DOWNLOADS)\tools\cuda\12.9.2\windows-x86_64\lib\x64;$(SolutionDir)vcpkg\downloads\tools\cuda\12.9.2\windows-x86_64\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies Condition="'$(Configuration)|$(Platform)'=='Release|x64'">cudart.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(ProjectDir)postbuild-copy-cuda-redist.bat tools\cuda\12.9.2\windows-x86_64 "$(OutDir)"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />

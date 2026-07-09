@@ -12,6 +12,7 @@
       "default-features": false,
       "features": [
         "cpu-dispatch",
+        "cuda",
         "dnnl"
       ]
     }
@@ -23,6 +24,9 @@
   "vcpkg-configuration": {
     "overlay-ports": [
       "./vcpkg-custom-overlays/ports"
+    ],
+    "overlay-triplets": [
+      "./vcpkg-custom-overlays/triplets"
     ]
   }
 }
