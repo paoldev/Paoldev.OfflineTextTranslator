@@ -22,6 +22,7 @@
         private void SettingsLoadedEventHandler(object sender, System.Configuration.SettingsLoadedEventArgs e)
         {
             // Validate model list in case the settings file has been manually modified.
+            ModelsContainer ??= new();
             if (!ModelsContainer.ValidateOnLoad())
             {
                 if (MessageBox.Show(
