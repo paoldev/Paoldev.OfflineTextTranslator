@@ -47,6 +47,7 @@
             labelElapsedTime = new Label();
             labelSeconds = new Label();
             splitContainer1 = new SplitContainer();
+            comboBoxModels = new ComboBox();
             splitContainer2 = new SplitContainer();
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
@@ -63,7 +64,7 @@
             // 
             textBoxInput.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             textBoxInput.Location = new Point(2, 25);
-            textBoxInput.Margin = new Padding(2, 2, 2, 2);
+            textBoxInput.Margin = new Padding(2);
             textBoxInput.Multiline = true;
             textBoxInput.Name = "textBoxInput";
             textBoxInput.ScrollBars = ScrollBars.Vertical;
@@ -74,7 +75,7 @@
             // 
             textBoxOutput.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             textBoxOutput.Location = new Point(2, 25);
-            textBoxOutput.Margin = new Padding(2, 2, 2, 2);
+            textBoxOutput.Margin = new Padding(2);
             textBoxOutput.Multiline = true;
             textBoxOutput.Name = "textBoxOutput";
             textBoxOutput.ReadOnly = true;
@@ -86,8 +87,8 @@
             // 
             comboBoxInput.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxInput.FormattingEnabled = true;
-            comboBoxInput.Location = new Point(2, 2);
-            comboBoxInput.Margin = new Padding(2, 2, 2, 2);
+            comboBoxInput.Location = new Point(198, 1);
+            comboBoxInput.Margin = new Padding(2);
             comboBoxInput.Name = "comboBoxInput";
             comboBoxInput.Size = new Size(129, 23);
             comboBoxInput.TabIndex = 2;
@@ -97,7 +98,7 @@
             comboBoxOutput.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxOutput.FormattingEnabled = true;
             comboBoxOutput.Location = new Point(2, 2);
-            comboBoxOutput.Margin = new Padding(2, 2, 2, 2);
+            comboBoxOutput.Margin = new Padding(2);
             comboBoxOutput.Name = "comboBoxOutput";
             comboBoxOutput.Size = new Size(129, 23);
             comboBoxOutput.TabIndex = 3;
@@ -105,8 +106,8 @@
             // 
             // buttonTranslate
             // 
-            buttonTranslate.Location = new Point(166, 1);
-            buttonTranslate.Margin = new Padding(2, 2, 2, 2);
+            buttonTranslate.Location = new Point(362, 0);
+            buttonTranslate.Margin = new Padding(2);
             buttonTranslate.Name = "buttonTranslate";
             buttonTranslate.Size = new Size(78, 24);
             buttonTranslate.TabIndex = 4;
@@ -117,8 +118,8 @@
             // checkBoxTranslateUI
             // 
             checkBoxTranslateUI.AutoSize = true;
-            checkBoxTranslateUI.Location = new Point(277, 3);
-            checkBoxTranslateUI.Margin = new Padding(2, 2, 2, 2);
+            checkBoxTranslateUI.Location = new Point(473, 2);
+            checkBoxTranslateUI.Margin = new Padding(2);
             checkBoxTranslateUI.Name = "checkBoxTranslateUI";
             checkBoxTranslateUI.Size = new Size(86, 19);
             checkBoxTranslateUI.TabIndex = 6;
@@ -132,7 +133,7 @@
             comboBoxOutput2.Enabled = false;
             comboBoxOutput2.FormattingEnabled = true;
             comboBoxOutput2.Location = new Point(0, 2);
-            comboBoxOutput2.Margin = new Padding(2, 2, 2, 2);
+            comboBoxOutput2.Margin = new Padding(2);
             comboBoxOutput2.Name = "comboBoxOutput2";
             comboBoxOutput2.Size = new Size(129, 23);
             comboBoxOutput2.TabIndex = 8;
@@ -143,19 +144,19 @@
             textBoxOutput2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             textBoxOutput2.Enabled = false;
             textBoxOutput2.Location = new Point(2, 25);
-            textBoxOutput2.Margin = new Padding(2, 2, 2, 2);
+            textBoxOutput2.Margin = new Padding(2);
             textBoxOutput2.Multiline = true;
             textBoxOutput2.Name = "textBoxOutput2";
             textBoxOutput2.ReadOnly = true;
             textBoxOutput2.ScrollBars = ScrollBars.Vertical;
-            textBoxOutput2.Size = new Size(589, 227);
+            textBoxOutput2.Size = new Size(589, 231);
             textBoxOutput2.TabIndex = 7;
             // 
             // checkBoxEnable2
             // 
             checkBoxEnable2.AutoSize = true;
             checkBoxEnable2.Location = new Point(163, 3);
-            checkBoxEnable2.Margin = new Padding(2, 2, 2, 2);
+            checkBoxEnable2.Margin = new Padding(2);
             checkBoxEnable2.Name = "checkBoxEnable2";
             checkBoxEnable2.Size = new Size(61, 19);
             checkBoxEnable2.TabIndex = 9;
@@ -235,11 +236,12 @@
             // 
             splitContainer1.Dock = DockStyle.Fill;
             splitContainer1.Location = new Point(0, 24);
-            splitContainer1.Margin = new Padding(2, 2, 2, 2);
+            splitContainer1.Margin = new Padding(2);
             splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
             // 
+            splitContainer1.Panel1.Controls.Add(comboBoxModels);
             splitContainer1.Panel1.Controls.Add(comboBoxInput);
             splitContainer1.Panel1.Controls.Add(textBoxInput);
             splitContainer1.Panel1.Controls.Add(checkBoxTranslateUI);
@@ -253,11 +255,21 @@
             splitContainer1.SplitterWidth = 3;
             splitContainer1.TabIndex = 13;
             // 
+            // comboBoxModels
+            // 
+            comboBoxModels.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBoxModels.FormattingEnabled = true;
+            comboBoxModels.Location = new Point(3, 2);
+            comboBoxModels.Name = "comboBoxModels";
+            comboBoxModels.Size = new Size(180, 23);
+            comboBoxModels.TabIndex = 7;
+            comboBoxModels.SelectedValueChanged += OncomboBoxModels_SelectedValueChanged;
+            // 
             // splitContainer2
             // 
             splitContainer2.Dock = DockStyle.Fill;
             splitContainer2.Location = new Point(0, 0);
-            splitContainer2.Margin = new Padding(2, 2, 2, 2);
+            splitContainer2.Margin = new Padding(2);
             splitContainer2.Name = "splitContainer2";
             splitContainer2.Orientation = Orientation.Horizontal;
             // 
@@ -285,7 +297,7 @@
             ClientSize = new Size(1190, 532);
             Controls.Add(splitContainer1);
             Controls.Add(menuStrip1);
-            Margin = new Padding(2, 2, 2, 2);
+            Margin = new Padding(2);
             Name = "Form1";
             Text = "Offline Text Translator";
             menuStrip1.ResumeLayout(false);
@@ -327,5 +339,6 @@
         private ToolStripSeparator toolStripSeparator2;
         private SplitContainer splitContainer1;
         private SplitContainer splitContainer2;
+        private ComboBox comboBoxModels;
     }
 }

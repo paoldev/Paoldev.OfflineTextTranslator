@@ -16,33 +16,23 @@
             //
             // this.SettingsSaving += this.SettingsSavingEventHandler;
             //
+            this.SettingsLoaded += this.SettingsLoadedEventHandler;
         }
 
-        public Paoldev.OfflineTextTranslator.DeviceType Device
+        private void SettingsLoadedEventHandler(object sender, System.Configuration.SettingsLoadedEventArgs e)
         {
-            get
+            // Validate model list in case the settings file has been manually modified.
+            if (!ModelsContainer.ValidateOnLoad())
             {
-                //It may throw an exception if the string is invalid; but it's catched by ReadInitialAppSettings().
-                return Enum.Parse<Paoldev.OfflineTextTranslator.DeviceType>(DeviceType);
-            }
-
-            set
-            {
-                DeviceType = value.ToString();
-            }
-        }
-
-        public Paoldev.OfflineTextTranslator.TokenizerType TokenizerType
-        {
-            get
-            {
-                //It may throw an exception if the string is invalid; but it's catched by ReadInitialAppSettings().
-                return Enum.Parse<Paoldev.OfflineTextTranslator.TokenizerType>(TokenizerModelType);
-            }
-
-            set
-            {
-                TokenizerModelType = value.ToString();
+                if (MessageBox.Show(
+                             "Invalid model list found. Repair it?",
+                             "Validation Error",
+                             MessageBoxButtons.YesNo,
+                             MessageBoxIcon.Error
+                         ) == DialogResult.Yes)
+                {
+                    ModelsContainer.TryAutoRepair();
+                }
             }
         }
 

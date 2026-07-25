@@ -12,7 +12,7 @@ namespace OfflineTextTranslatorApp.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.9.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "18.8.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -26,60 +26,23 @@ namespace OfflineTextTranslatorApp.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string LanguageDescriptionFile {
+        public string CurrentModel {
             get {
-                return ((string)(this["LanguageDescriptionFile"]));
+                return ((string)(this["CurrentModel"]));
             }
             set {
-                this["LanguageDescriptionFile"] = value;
+                this["CurrentModel"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("None")]
-        public string TokenizerModelType {
+        public global::OfflineTextTranslatorApp.ModelDescriptors ModelsContainer {
             get {
-                return ((string)(this["TokenizerModelType"]));
+                return ((global::OfflineTextTranslatorApp.ModelDescriptors)(this["ModelsContainer"]));
             }
             set {
-                this["TokenizerModelType"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string TokenizerModelFilePath {
-            get {
-                return ((string)(this["TokenizerModelFilePath"]));
-            }
-            set {
-                this["TokenizerModelFilePath"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string CTranslate2ModelDirectory {
-            get {
-                return ((string)(this["CTranslate2ModelDirectory"]));
-            }
-            set {
-                this["CTranslate2ModelDirectory"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Auto")]
-        public string DeviceType {
-            get {
-                return ((string)(this["DeviceType"]));
-            }
-            set {
-                this["DeviceType"] = value;
+                this["ModelsContainer"] = value;
             }
         }
     }

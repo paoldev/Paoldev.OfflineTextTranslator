@@ -1,3 +1,4 @@
+using OfflineTextTranslatorApp.Properties;
 using System.Diagnostics;
 
 namespace OfflineTextTranslatorApp
@@ -14,11 +15,8 @@ namespace OfflineTextTranslatorApp
         private readonly string _untranslatedEnglishButton = "Translate";
         private readonly string _untranslatedEnglishElapsedTime = "Elapsed time";
 
-        private string _LanguageFilePath = string.Empty;
-        private string _TokenizerModelFilePath = string.Empty;
-        private string _CTranslate2ModelDirectoryPath = string.Empty;
-        private Paoldev.OfflineTextTranslator.TokenizerType _TokenizerModelFileType = Paoldev.OfflineTextTranslator.TokenizerType.None;
-        private Paoldev.OfflineTextTranslator.DeviceType _DeviceType = Paoldev.OfflineTextTranslator.DeviceType.Auto;
+        private ModelDescriptor? _CurrentModel = null;
+        private bool bInitializingComboBoxModels = false;
 
         public Form1()
         {
@@ -31,7 +29,7 @@ namespace OfflineTextTranslatorApp
         {
             base.OnShown(e);
 
-            if (IsDefaultConfiguration())
+            if (_CurrentModel == null)
             {
                 await ShowConfigurationForm();
             }
@@ -69,26 +67,27 @@ namespace OfflineTextTranslatorApp
 
             //Configuration error condition: there is no need to try to initialize the Translator in this case.
             string sExtraError = string.Empty;
-            bool bError = IsDefaultConfiguration() ||
-                //(string.IsNullOrEmpty(_TokenizerModelFilePath) && _TokenizerModelFileType != Paoldev.OfflineTextTranslator.TokenizerType.None) ||  //This condition is valid
-                string.IsNullOrEmpty(_CTranslate2ModelDirectoryPath) ||
-                string.IsNullOrEmpty(_LanguageFilePath);
+            bool bError = (_CurrentModel == null) ||
+                (_CurrentModel is not CT2ModelDescriptor);    // NB: only CT2ModelDescriptor is currently supported
 
             if (!bError)
             {
+                // NB: only CT2ModelDescriptor is currently supported
+                var ct2Model = (_CurrentModel as CT2ModelDescriptor)!;
+
                 var options = new Paoldev.OfflineTextTranslator.TranslatorOptions
                 {
-                    Device = _DeviceType,
-                    TokenizerModelType = _TokenizerModelFileType,
-                    TokenizerModelFilePath = _TokenizerModelFilePath,
-                    CTranslate2ModelDirectoryPath = _CTranslate2ModelDirectoryPath
+                    Device = ct2Model.Device,
+                    TokenizerModelType = ct2Model.TokenizerType,
+                    TokenizerModelFilePath = ct2Model.TokenizerModelFilePath,
+                    CTranslate2ModelDirectoryPath = ct2Model.ModelDirectory
                 };
 
                 try
                 {
                     Translator = await Paoldev.OfflineTextTranslator.Translator.CreateAsync(options);
 
-                    var languageDescription = await ReadLanguageDescriptionFile(_LanguageFilePath);
+                    var languageDescription = await ReadLanguageDescriptionFile(ct2Model.LanguageDescriptionFile);
 
                     languages = languageDescription.Item1;
                     LanguagePrefixes = languageDescription.Item2;
@@ -137,13 +136,20 @@ namespace OfflineTextTranslatorApp
                 MessageBox.Show(
                     (!string.IsNullOrEmpty(sExtraError) ? (sExtraError + Environment.NewLine + Environment.NewLine) : string.Empty) +
                     $"Error initializing the translator with following parameters:" + Environment.NewLine + Environment.NewLine +
-                    $"Language Description File: {_LanguageFilePath}" + Environment.NewLine + Environment.NewLine +
-                    $"Device Type: {_DeviceType}" + Environment.NewLine + Environment.NewLine +
-                    $"Tokenizer Model Type: {_TokenizerModelFileType}" + Environment.NewLine + Environment.NewLine +
-                    $"Tokenizer Model File: {_TokenizerModelFilePath}" + Environment.NewLine + Environment.NewLine +
-                    $"CTranslate2 Model Directory: {_CTranslate2ModelDirectoryPath}" + Environment.NewLine + Environment.NewLine +
+                    (_CurrentModel?.GetDescription() ?? "Missing model") + Environment.NewLine + Environment.NewLine +
                     $"Please change settings in File -> Configuration dialog.",
                     "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private async void OncomboBoxModels_SelectedValueChanged(object sender, EventArgs e)
+        {
+            if (!bInitializingComboBoxModels)
+            {
+                var currentModel = comboBoxModels.SelectedItem as string;
+                SelectCurrentModel(currentModel);
+
+                await InitializeTranslatorAsync();
             }
         }
 
@@ -291,44 +297,53 @@ namespace OfflineTextTranslatorApp
         {
             var config = new ConfigurationForm
             {
-                StartPosition = FormStartPosition.CenterParent,
-                LanguageFile = _LanguageFilePath,
-                Device = _DeviceType,
-                TokenizerModelFile = _TokenizerModelFilePath,
-                TokenizerModelFileType = _TokenizerModelFileType,
-                CTranslate2Directory = _CTranslate2ModelDirectoryPath
+                StartPosition = FormStartPosition.CenterParent
             };
             if (config.ShowDialog(this) == DialogResult.OK)
             {
-                _LanguageFilePath = config.LanguageFile;
-                _DeviceType = config.Device;
-                _TokenizerModelFilePath = config.TokenizerModelFile;
-                _TokenizerModelFileType = config.TokenizerModelFileType;
-                _CTranslate2ModelDirectoryPath = config.CTranslate2Directory;
+                var currentModel = comboBoxModels.SelectedItem as string;
+                InitComboBoxModels(currentModel);
 
                 await InitializeTranslatorAsync();
             }
         }
 
-        private bool IsDefaultConfiguration()
+        private void InitComboBoxModels(string? selectedModelName)
         {
-            return
-                string.IsNullOrEmpty(_LanguageFilePath) &&
-                (_DeviceType == Paoldev.OfflineTextTranslator.DeviceType.Auto) &&
-                string.IsNullOrEmpty(_TokenizerModelFilePath) &&
-                (_TokenizerModelFileType == Paoldev.OfflineTextTranslator.TokenizerType.None) &&
-                string.IsNullOrEmpty(_CTranslate2ModelDirectoryPath);
+            bInitializingComboBoxModels = true;
+            comboBoxModels.SelectedItem = null; // This call triggers OncomboBoxModels_SelectedValueChanged event.
+            comboBoxModels.Items.Clear();
+            comboBoxModels.Items.AddRange([.. Settings.Default.ModelsContainer.Models.Where(m => m.IsValid()).Select(m => m.Name.Trim())]);
+            SelectCurrentModel(selectedModelName);
+            comboBoxModels.SelectedItem = _CurrentModel?.Name;  // This call triggers OncomboBoxModels_SelectedValueChanged event.
+            bInitializingComboBoxModels = false;
+        }
+
+        private void SelectCurrentModel(string? modelName)
+        {
+            _CurrentModel = null;
+            if (!string.IsNullOrEmpty(modelName))
+            {
+                _CurrentModel = Settings.Default.ModelsContainer.Models.FirstOrDefault(m => m.Name == modelName);
+            }
+            if ((_CurrentModel == null) && Settings.Default.ModelsContainer.Models.Count > 0)
+            {
+                _CurrentModel = Settings.Default.ModelsContainer.Models[0];
+            }
+            if (_CurrentModel != null)
+            {
+                Settings.Default.CurrentModel = _CurrentModel.Name;
+                Settings.Default.Save();
+            }
         }
 
         private void ReadInitialAppSettings()
         {
+            _CurrentModel = null;
             try
             {
-                _LanguageFilePath = Properties.Settings.Default.LanguageDescriptionFile;
-                _TokenizerModelFilePath = Properties.Settings.Default.TokenizerModelFilePath;
-                _CTranslate2ModelDirectoryPath = Properties.Settings.Default.CTranslate2ModelDirectory;
-                _TokenizerModelFileType = Properties.Settings.Default.TokenizerType;
-                _DeviceType = Properties.Settings.Default.Device;
+                string currentModel = Settings.Default.CurrentModel;
+                InitComboBoxModels(currentModel);
             }
             catch (Exception ex)
             {
