@@ -8,8 +8,7 @@ using System.Xml.Serialization;
 
 namespace OfflineTextTranslatorApp
 {
-    [XmlInclude(typeof(CT2ModelDescriptor))]
-    //[XmlInclude(typeof(AnotherModelDescriptor))]
+    [XmlInclude(typeof(CT2ModelDescriptor))]    // Here add other models
     public abstract class ModelDescriptor
     {
         [Category("Common")]
@@ -105,21 +104,6 @@ namespace OfflineTextTranslatorApp
         }
     }
 
-    /*
-    [Serializable]
-    public class AnotherModelDescriptor : ModelDescriptor
-    {
-        [DisplayName("Test A")]
-        public string TestA { get; set; } = string.Empty;
-
-        [DisplayName("Test B")]
-        public int TestB { get; set; } = 0;
-
-        public override bool IsValid() => true;
-        public override string GetInvalidDescription() => string.Empty;
-    }
-    */
-
     [Serializable]
     public class ModelDescriptors
     {
@@ -205,7 +189,7 @@ namespace OfflineTextTranslatorApp
 
     public class ModelDescriptorsEditor(Type type) : CollectionEditor(type)
     {
-        protected override Type[] CreateNewItemTypes() => [typeof(CT2ModelDescriptor)/*, typeof(AnotherModelDescriptor)*/];
+        protected override Type[] CreateNewItemTypes() => [typeof(CT2ModelDescriptor)]; // Here add other models.
 
         protected override string GetDisplayText(object? value)
         {
