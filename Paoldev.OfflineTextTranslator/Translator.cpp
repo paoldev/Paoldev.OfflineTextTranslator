@@ -4,6 +4,7 @@
 
 #pragma warning(push)
 #pragma warning(disable: 4244)  //v3.17.1: warning C4244: 'argument': conversion from 'const ctranslate2::dim_t' to '_Ty', possible loss of data
+#pragma warning(disable: 4834)  //float2half_impl in half.hpp(1041, 14) v2.2.1: warning C4834: discarding return value of function with [[nodiscard]] attribute
 #include "ctranslate2/translator.h"
 #pragma warning(pop)
 
